@@ -9,6 +9,14 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
     :root{
+    /* Add your CSS variables here, for example: */
+    --card: #181a20;
+    --border: #23263a;
+    --radius: 14px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.08);
+    --muted: #7a7c8a;
+    --text: #eaeaea;
+    }
 .grid{display:grid; gap:1.2rem}
 
 
@@ -69,8 +77,6 @@ transform: translateX(-120%);
 <span class="badge">MongoDB</span>
 <span class="badge">MySQL</span>
 <span class="badge">Postman</span>
-</div>
-</section>
 
 
 <!-- RESUME -->
@@ -119,6 +125,31 @@ transform: translateX(-120%);
 </div>
 </div>
 </footer>
+<script>
+    // Mobile menu (optional toggle if you want to add a hamburger later)
+const btn = document.querySelector('.menu-btn');
+const links = document.getElementById('navLinks');
+if(btn){
+btn.addEventListener('click',()=>{
+links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+});
+}
 
+
+// Contact form (demo – no backend; opens mail client)
+document.getElementById('contactForm').addEventListener('submit', e => {
+e.preventDefault();
+const data = new FormData(e.target);
+const name = encodeURIComponent(data.get('name'));
+const email = encodeURIComponent(data.get('email'));
+const message = encodeURIComponent(data.get('message'));
+window.location.href = `mailto:your.email@example.com?subject=Portfolio%20message%20from%20${name}&body=From:%20${name}%20(%20${email}%20)%0D%0A%0D%0A${message}`;
+document.getElementById('formNote').textContent = 'Opening your email app…';
+});
+
+
+// Year
+document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
