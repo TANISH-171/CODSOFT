@@ -1,155 +1,304 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TANISH_S_Portfolio</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Your Name – Portfolio</title>
+  <meta name="description" content="Personal portfolio of YOUR_NAME – AI • Web • Sustainability." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
     :root{
-    /* Add your CSS variables here, for example: */
-    --card: #181a20;
-    --border: #23263a;
-    --radius: 14px;
-    --shadow: 0 2px 12px rgba(0,0,0,0.08);
-    --muted: #7a7c8a;
-    --text: #eaeaea;
+      --bg:#0b0c10; /* base dark */
+      --card:#12131a;
+      --text:#e7ebf3;
+      --muted:#a7b0c0;
+      --brand:#7cf2d0;  /* mint */
+      --brand-2:#7aa2ff;/* blue */
+      --accent:#ffe07a; /* soft yellow */
+      --border:rgba(255,255,255,.08);
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:18px;
     }
-.grid{display:grid; gap:1.2rem}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; background: radial-gradient(1200px 600px at 20% -10%, rgba(124,242,208,.15), transparent 60%),
+                               radial-gradient(1000px 600px at 120% 10%, rgba(122,162,255,.10), transparent 60%),
+                               var(--bg);
+      color:var(--text);
+      font: 16px/1.55 Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Noto Sans, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+    a{color:var(--brand-2); text-decoration:none}
+    .container{width:min(1100px, 92%); margin-inline:auto}
+    /* NAV */
+    nav{
+      position:sticky; top:0; z-index:50; backdrop-filter:saturate(180%) blur(12px);
+      background:rgba(11,12,16,.7); border-bottom:1px solid var(--border);
+    }
+    .nav-inner{display:flex; align-items:center; justify-content:space-between; padding:.9rem 0}
+    .brand{display:flex; align-items:center; gap:.7rem; font-weight:800; letter-spacing:.3px}
+    .brand .dot{width:10px; height:10px; border-radius:50%; background:linear-gradient(135deg,var(--brand),var(--brand-2)); box-shadow:0 0 20px rgba(124,242,208,.6)}
+    .nav-links{display:flex; gap:1.1rem; align-items:center}
+    .nav-links a{padding:.45rem .75rem; border-radius:999px; color:var(--text)}
+    .nav-links a:hover{background:rgba(255,255,255,.06)}
+    .cta{background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#081014; font-weight:700}
+    .cta:hover{filter:brightness(1.05)}
+    .menu-btn{display:none}
 
+    /* HERO */
+    header{padding:5.5rem 0 3rem}
+    .hero{display:grid; grid-template-columns:1.2fr .8fr; align-items:center; gap:2rem}
+    .kicker{letter-spacing:.25em; color:var(--muted); font-size:.78rem; text-transform:uppercase}
+    h1{font-family:"Space Grotesk", Inter, system-ui; font-size:clamp(2rem, 1rem + 4vw, 3.4rem); line-height:1.08; margin:.6rem 0 1rem}
+    .subtitle{color:var(--muted); font-size:1.05rem}
+    .chips{margin:1.2rem 0 2rem; display:flex; flex-wrap:wrap; gap:.6rem}
+    .chip{border:1px solid var(--border); padding:.45rem .75rem; border-radius:999px; color:var(--muted)}
+    .actions{display:flex; gap:.8rem; flex-wrap:wrap}
+    .btn{display:inline-flex; align-items:center; gap:.55rem; border:1px solid var(--border); padding:.78rem 1rem; border-radius:12px; background:#161824; color:var(--text); box-shadow:var(--shadow)}
+    .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2)); color:#0b0c10; font-weight:800}
+    .btn.ghost{background:transparent}
+    .hero-card{background:linear-gradient(180deg, rgba(124,242,208,.06), transparent 40%), var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:1.1rem; box-shadow:var(--shadow)}
+    .pfp{width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:16px; border:1px solid var(--border)}
 
-/* ABOUT */
-.about{display:grid; grid-template-columns: .9fr 1.1fr; gap:1.5rem}
-.card{background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:1.1rem; box-shadow:var(--shadow)}
+    /* SECTIONS */
+    section{padding:3.5rem 0}
+    .section-title{font-family:"Space Grotesk"; font-size:1.8rem; margin:0 0 1.3rem}
+    .grid{display:grid; gap:1.2rem}
 
+    /* ABOUT */
+    .about{display:grid; grid-template-columns: .9fr 1.1fr; gap:1.5rem}
+    .card{background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:1.1rem; box-shadow:var(--shadow)}
 
-/* PROJECTS */
-.projects{grid-template-columns: repeat(auto-fit, minmax(260px,1fr))}
-.project{position:relative; overflow:hidden}
-.project h3{margin:.2rem 0 .45rem}
-.taglist{display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.6rem}
-.tag{font-size:.8rem; color:var(--muted); border:1px dashed var(--border); padding:.25rem .5rem; border-radius:999px}
-.project a.more{position:absolute; right:.8rem; top:.8rem; font-weight:700}
+    /* PROJECTS */
+    .projects{grid-template-columns: repeat(auto-fit, minmax(260px,1fr))}
+    .project{position:relative; overflow:hidden}
+    .project h3{margin:.2rem 0 .45rem}
+    .taglist{display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.6rem}
+    .tag{font-size:.8rem; color:var(--muted); border:1px dashed var(--border); padding:.25rem .5rem; border-radius:999px}
+    .project a.more{position:absolute; right:.8rem; top:.8rem; font-weight:700}
 
+    /* SKILLS */
+    .skills{display:flex; flex-wrap:wrap; gap:.6rem}
+    .badge{border:1px solid var(--border); background:#0f1118; padding:.55rem .75rem; border-radius:12px}
 
-/* SKILLS */
-.skills{display:flex; flex-wrap:wrap; gap:.6rem}
-.badge{border:1px solid var(--border); background:#0f1118; padding:.55rem .75rem; border-radius:12px}
+    /* CONTACT */
+    .contact{display:grid; grid-template-columns:1.1fr .9fr; gap:1.2rem}
+    form{display:grid; gap:.7rem}
+    input, textarea{width:100%; background:#0f1118; color:var(--text); border:1px solid var(--border); border-radius:12px; padding:.9rem}
+    textarea{min-height:140px}
 
+    footer{padding:2.2rem 0 3rem; color:var(--muted); border-top:1px solid var(--border)}
 
-/* CONTACT */
-.contact{display:grid; grid-template-columns:1.1fr .9fr; gap:1.2rem}
-form{display:grid; gap:.7rem}
-input, textarea{width:100%; background:#0f1118; color:var(--text); border:1px solid var(--border); border-radius:12px; padding:.9rem}
-textarea{min-height:140px}
+    /* MOBILE */
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr}
+      .about{grid-template-columns:1fr}
+      .contact{grid-template-columns:1fr}
+      header{padding-top:4rem}
+    }
 
-
-footer{padding:2.2rem 0 3rem; color:var(--muted); border-top:1px solid var(--border)}
-
-
-/* MOBILE */
-@media (max-width: 900px){
-.hero{grid-template-columns:1fr}
-.about{grid-template-columns:1fr}
-.contact{grid-template-columns:1fr}
-header{padding-top:4rem}
-}
-
-
-/* Fun micro interactions */
-.shine{position:relative}
-.shine:after{
-content:""; position:absolute; inset:0; background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.15) 8%, transparent 16%);
-transform: translateX(-120%);
-}
-.shine:hover:after{animation: shine 1.4s ease}
-@keyframes shine{to{transform: translateX(120%)}}
-</style>
+    /* Fun micro interactions */
+    .shine{position:relative}
+    .shine:after{
+      content:""; position:absolute; inset:0; background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.15) 8%, transparent 16%);
+      transform: translateX(-120%);
+    }
+    .shine:hover:after{animation: shine 1.4s ease}
+    @keyframes shine{to{transform: translateX(120%)}}
+  </style>
 </head>
 <body>
-    <!-- NAVBAR -->
-<span class="badge">Flask</span>
-<span class="badge">Node.js</span>
-<span class="badge">Docker</span>
-<span class="badge">GitHub Actions</span>
-<span class="badge">MongoDB</span>
-<span class="badge">MySQL</span>
-<span class="badge">Postman</span>
+  <!-- NAVBAR -->
+  <nav>
+    <div class="container nav-inner">
+      <div class="brand"><span class="dot"></span> <span>YOUR_NAME</span></div>
+      <button class="menu-btn" aria-label="Toggle Menu">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#resume" class="cta">Resume</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
 
+  <!-- HERO -->
+  <header class="container">
+    <div class="hero">
+      <div>
+        <div class="kicker">Hi 👋, I’m YOUR_NAME</div>
+        <h1>AI • Web • Sustainability —
+          <span style="background:linear-gradient(135deg,var(--brand),var(--brand-2)); -webkit-background-clip:text; background-clip:text; color:transparent">Gen‑Z portfolio</span>
+        </h1>
+        <p class="subtitle">I build useful things with Python, React, and ML — recently: a Chrome extension that flags greenwashing, and a crop‑price forecasting dashboard. Love shipping fast, learning in public, and making clean UX.</p>
+        <div class="chips">
+          <span class="chip">#OpenSource</span>
+          <span class="chip">#AIEngineerInProgress</span>
+          <span class="chip">#SustainabilityTech</span>
+        </div>
+        <div class="actions">
+          <a class="btn primary shine" href="#projects">🚀 See Projects</a>
+          <a class="btn ghost" href="https://github.com/GITHUB_USERNAME" target="_blank" rel="noreferrer">⭐ GitHub</a>
+          <a class="btn ghost" href="https://www.linkedin.com/in/YOUR_LINKEDIN/" target="_blank" rel="noreferrer">💼 LinkedIn</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <!-- Tip: Replace GITHUB_USERNAME with yours to auto‑load your avatar -->
+        <img class="pfp" src="https://github.com/GITHUB_USERNAME.png" alt="YOUR_NAME portrait"/>
+        <div style="margin-top:.8rem; color:var(--muted); font-size:.9rem">Using your GitHub avatar. Update <code>GITHUB_USERNAME</code> in the HTML.</div>
+      </div>
+    </div>
+  </header>
 
-<!-- RESUME -->
-<section id="resume">
-<h2 class="section-title">Resume</h2>
-<div class="card" style="display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap">
-<p style="margin:0; color:var(--muted)">Grab a PDF version of my resume or view it online.</p>
-<div class="actions">
-<a class="btn primary shine" href="./YOUR_RESUME.pdf" download>⬇️ Download PDF</a>
-<a class="btn" href="https://github.com/GITHUB_USERNAME" target="_blank" rel="noreferrer">View on GitHub</a>
-</div>
-</div>
-</section>
+  <main class="container">
+    <!-- ABOUT -->
+    <section id="about">
+      <h2 class="section-title">About Me</h2>
+      <div class="about">
+        <div class="card">
+          <p>
+            I’m a developer blending <strong>AI/ML</strong>, <strong>web</strong>, and a dash of <strong>product thinking</strong>. I enjoy turning messy data and vague ideas into crisp, useful tools. Current interests: 
+            <em>BERT/RAG</em>, <em>Chrome extensions</em>, <em>clean UI/UX</em>, and <em>automation</em>.
+          </p>
+          <ul>
+            <li>📍 Location: YOUR_CITY</li>
+            <li>✉️ Email: <a href="mailto:your.email@example.com">your.email@example.com</a></li>
+            <li>📄 Resume: <a href="#resume">download below</a></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3 style="margin-top:0">Quick Highlights</h3>
+          <ul>
+            <li>Built <strong>Greenwash Detector</strong> – flags misleading sustainability claims on fashion sites (H&M, Zara, Shein).</li>
+            <li>Shipped <strong>Market Price Forecasting</strong> – ML dashboard comparing ARIMA, LSTM, Prophet & Random Forest.</li>
+            <li>Created a <strong>Unit Testing Framework</strong> in Python with logging + CLIs for course projects.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
+    <!-- PROJECTS -->
+    <section id="projects">
+      <h2 class="section-title">Projects</h2>
+      <div class="grid projects">
+        <article class="card project">
+          <a class="more" href="https://github.com/GITHUB_USERNAME/greenwash-detector" target="_blank" rel="noreferrer">→</a>
+          <h3>Greenwash Detector</h3>
+          <p>Chrome Extension + Flask/BERT backend to analyze sustainability claims on product pages in real time. Sidebar UI + score & justification.</p>
+          <div class="taglist">
+            <span class="tag">React</span><span class="tag">Flask</span><span class="tag">BERT</span><span class="tag">MongoDB</span>
+          </div>
+        </article>
 
-<!-- CONTACT -->
-<section id="contact">
-<h2 class="section-title">Contact</h2>
-<div class="contact">
-<div class="card">
-<h3 style="margin-top:0">Let’s build something</h3>
-<p class="subtitle">Emails are cool. Coffee chats are cooler ☕. I’m open to internships, collabs, and hackathons.</p>
-<p>Drop a note at <a href="mailto:your.email@example.com">your.email@example.com</a> or use the form.</p>
-</div>
-<div class="card">
-<form id="contactForm">
-<input type="text" name="name" placeholder="Your name" required />
-<input type="email" name="email" placeholder="Your email" required />
-<textarea name="message" placeholder="Your message" required></textarea>
-<button class="btn primary" type="submit">Send Message</button>
-<div id="formNote" style="color:var(--muted)"></div>
-</form>
-</div>
-</div>
-</section>
-</main>
+        <article class="card project">
+          <a class="more" href="https://github.com/GITHUB_USERNAME/crop-price-forecasting" target="_blank" rel="noreferrer">→</a>
+          <h3>Market Price Forecasting</h3>
+          <p>ML dashboard to forecast crop prices; compares ARIMA, LSTM, Prophet & Random Forest, picks the best model per run.</p>
+          <div class="taglist">
+            <span class="tag">Python</span><span class="tag">Flask</span><span class="tag">Matplotlib</span><span class="tag">Time‑series</span>
+          </div>
+        </article>
 
+        <article class="card project">
+          <a class="more" href="https://github.com/GITHUB_USERNAME/unit-testing-framework" target="_blank" rel="noreferrer">→</a>
+          <h3>Unit Testing Framework</h3>
+          <p>Custom Python testing utilities with CLI runner, logging, and math helpers for educational projects.</p>
+          <div class="taglist">
+            <span class="tag">Python</span><span class="tag">unittest</span><span class="tag">CLI</span>
+          </div>
+        </article>
+      </div>
+    </section>
 
-<footer>
-<div class="container" style="display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap">
-<div>© <span id="year"></span> YOUR_NAME. Built with HTML • CSS • JS.</div>
-<div style="display:flex; gap:.8rem">
-<a href="https://github.com/GITHUB_USERNAME" target="_blank" rel="noreferrer">GitHub</a>
-<a href="https://www.linkedin.com/in/YOUR_LINKEDIN/" target="_blank" rel="noreferrer">LinkedIn</a>
-<a href="#top">Back to top ↑</a>
-</div>
-</div>
-</footer>
-<script>
+    <!-- SKILLS -->
+    <section id="skills">
+      <h2 class="section-title">Languages & Tools</h2>
+      <div class="skills">
+        <span class="badge">Python</span>
+        <span class="badge">JavaScript</span>
+        <span class="badge">C/C++</span>
+        <span class="badge">React</span>
+        <span class="badge">Flask</span>
+        <span class="badge">Node.js</span>
+        <span class="badge">Docker</span>
+        <span class="badge">GitHub Actions</span>
+        <span class="badge">MongoDB</span>
+        <span class="badge">MySQL</span>
+        <span class="badge">Postman</span>
+      </div>
+    </section>
+
+    <!-- RESUME -->
+    <section id="resume">
+      <h2 class="section-title">Resume</h2>
+      <div class="card" style="display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap">
+        <p style="margin:0; color:var(--muted)">Grab a PDF version of my resume or view it online.</p>
+        <div class="actions">
+          <a class="btn primary shine" href="./YOUR_RESUME.pdf" download>⬇️ Download PDF</a>
+          <a class="btn" href="https://github.com/GITHUB_USERNAME" target="_blank" rel="noreferrer">View on GitHub</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2 class="section-title">Contact</h2>
+      <div class="contact">
+        <div class="card">
+          <h3 style="margin-top:0">Let’s build something</h3>
+          <p class="subtitle">Emails are cool. Coffee chats are cooler ☕. I’m open to internships, collabs, and hackathons.</p>
+          <p>Drop a note at <a href="mailto:your.email@example.com">your.email@example.com</a> or use the form.</p>
+        </div>
+        <div class="card">
+          <form id="contactForm">
+            <input type="text" name="name" placeholder="Your name" required />
+            <input type="email" name="email" placeholder="Your email" required />
+            <textarea name="message" placeholder="Your message" required></textarea>
+            <button class="btn primary" type="submit">Send Message</button>
+            <div id="formNote" style="color:var(--muted)"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container" style="display:flex; align-items:center; justify-content:space-between; gap:1rem; flex-wrap:wrap">
+      <div>© <span id="year"></span> YOUR_NAME. Built with HTML • CSS • JS.</div>
+      <div style="display:flex; gap:.8rem">
+        <a href="https://github.com/GITHUB_USERNAME" target="_blank" rel="noreferrer">GitHub</a>
+        <a href="https://www.linkedin.com/in/YOUR_LINKEDIN/" target="_blank" rel="noreferrer">LinkedIn</a>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
     // Mobile menu (optional toggle if you want to add a hamburger later)
-const btn = document.querySelector('.menu-btn');
-const links = document.getElementById('navLinks');
-if(btn){
-btn.addEventListener('click',()=>{
-links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
-});
-}
+    const btn = document.querySelector('.menu-btn');
+    const links = document.getElementById('navLinks');
+    if(btn){
+      btn.addEventListener('click',()=>{
+        links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+      });
+    }
 
+    // Contact form (demo – no backend; opens mail client)
+    document.getElementById('contactForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const data = new FormData(e.target);
+      const name = encodeURIComponent(data.get('name'));
+      const email = encodeURIComponent(data.get('email'));
+      const message = encodeURIComponent(data.get('message'));
+      window.location.href = `mailto:your.email@example.com?subject=Portfolio%20message%20from%20${name}&body=From:%20${name}%20(%20${email}%20)%0D%0A%0D%0A${message}`;
+      document.getElementById('formNote').textContent = 'Opening your email app…';
+    });
 
-// Contact form (demo – no backend; opens mail client)
-document.getElementById('contactForm').addEventListener('submit', e => {
-e.preventDefault();
-const data = new FormData(e.target);
-const name = encodeURIComponent(data.get('name'));
-const email = encodeURIComponent(data.get('email'));
-const message = encodeURIComponent(data.get('message'));
-window.location.href = `mailto:your.email@example.com?subject=Portfolio%20message%20from%20${name}&body=From:%20${name}%20(%20${email}%20)%0D%0A%0D%0A${message}`;
-document.getElementById('formNote').textContent = 'Opening your email app…';
-});
-
-
-// Year
-document.getElementById('year').textContent = new Date().getFullYear();
-</script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
