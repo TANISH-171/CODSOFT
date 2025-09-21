@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TANISH_S_Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+    :root{
+.grid{display:grid; gap:1.2rem}
+
+
+/* ABOUT */
+.about{display:grid; grid-template-columns: .9fr 1.1fr; gap:1.5rem}
+.card{background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:1.1rem; box-shadow:var(--shadow)}
+
+
+/* PROJECTS */
+.projects{grid-template-columns: repeat(auto-fit, minmax(260px,1fr))}
+.project{position:relative; overflow:hidden}
+.project h3{margin:.2rem 0 .45rem}
+.taglist{display:flex; flex-wrap:wrap; gap:.4rem; margin-top:.6rem}
+.tag{font-size:.8rem; color:var(--muted); border:1px dashed var(--border); padding:.25rem .5rem; border-radius:999px}
+.project a.more{position:absolute; right:.8rem; top:.8rem; font-weight:700}
+
+
+/* SKILLS */
+.skills{display:flex; flex-wrap:wrap; gap:.6rem}
+.badge{border:1px solid var(--border); background:#0f1118; padding:.55rem .75rem; border-radius:12px}
+
+
+/* CONTACT */
+.contact{display:grid; grid-template-columns:1.1fr .9fr; gap:1.2rem}
+form{display:grid; gap:.7rem}
+input, textarea{width:100%; background:#0f1118; color:var(--text); border:1px solid var(--border); border-radius:12px; padding:.9rem}
+textarea{min-height:140px}
+
+
+footer{padding:2.2rem 0 3rem; color:var(--muted); border-top:1px solid var(--border)}
+
+
+/* MOBILE */
+@media (max-width: 900px){
+.hero{grid-template-columns:1fr}
+.about{grid-template-columns:1fr}
+.contact{grid-template-columns:1fr}
+header{padding-top:4rem}
+}
+
+
+/* Fun micro interactions */
+.shine{position:relative}
+.shine:after{
+content:""; position:absolute; inset:0; background: linear-gradient(120deg, transparent 0%, rgba(255,255,255,.15) 8%, transparent 16%);
+transform: translateX(-120%);
+}
+.shine:hover:after{animation: shine 1.4s ease}
+@keyframes shine{to{transform: translateX(120%)}}
+</style>
+</head>
+<body>
+    
+</body>
+</html>
