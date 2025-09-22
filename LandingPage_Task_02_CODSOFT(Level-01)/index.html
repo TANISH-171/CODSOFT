@@ -1,357 +1,500 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Landing page</title>
-     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>RANTY — The Perfect Home</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ THEME ============ */
+:root{
+  --bg:#0f1216; --bg-2:#151a20; --card:#1b222b;
+  --text:#f3f5f7; --muted:#a9b3bf;
+  --border:rgba(255,255,255,.08);
+  --accent:#d8b48a; --accent-2:#c8a278;
+  --shadow:0 22px 60px rgba(0,0,0,.45);
+  --radius:20px; --radius-lg:26px; --radius-xl:34px;
+  --max:1200px;
+}
+html[data-theme="light"]{
+  --bg:#f6f7f9; --bg-2:#ffffff; --card:#ffffff;
+  --text:#1c232b; --muted:#5a6673; --border:rgba(18,22,28,.12);
+  --shadow:0 18px 40px rgba(10,14,20,.1);
+}
 
-     <style>
-    :root{
-      --bg:#0f1216;
-      --bg-2:#151a20;
-      --card:#1b222b;
-      --muted:#9aa5b1;
-      --text:#f3f5f7;
-      --accent:#d8b48a; /* sand / taupe */
-      --accent-2:#c8a278;
-      --glass:rgba(255,255,255,.08);
-      --border:rgba(255,255,255,.08);
-      --shadow:0 20px 60px rgba(0,0,0,.45);
-      --radius:22px;
-      --radius-lg:28px;
-      --radius-xl:36px;
-      --max:1200px;
-    }
+/* base */
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  font-family:Inter,system-ui,Segoe UI,Roboto,Arial,Helvetica,sans-serif;
+  color:var(--text);
+  background:
+    radial-gradient(1100px 460px at 70% -10%, #202730 0%, #13181e 60%, var(--bg) 100%)
+    fixed;
+  background-color:var(--bg);
+  line-height:1.55;
+}
+html[data-theme="light"] body{
+  background:linear-gradient(180deg,#f1f3f7, #f7f9fb 30%, var(--bg) 100%);
+}
 
-    *{box-sizing:border-box}
-    html,body{margin:0}
-    body{
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif;
-      color:var(--text);
-      background: radial-gradient(1200px 500px at 70% 0%, #202730 0%, #13181e 55%, var(--bg) 100%) fixed;
-      background-color:var(--bg);
-      line-height:1.55;
-    }
+/* utilities */
+.container{max-width:var(--max); margin:auto; padding:0 18px}
+.muted{color:var(--muted)}
+.btn{
+  appearance:none; border:0; cursor:pointer; font-weight:700;
+  padding:14px 20px; border-radius:16px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#151515;
+  box-shadow:0 12px 30px rgba(216,180,138,.35);
+  transition:transform .12s ease;
+}
+.btn:active{transform:translateY(1px)}
+.btn--ghost{
+  background:transparent; color:var(--text);
+  border:1px solid var(--border); box-shadow:none;
+}
+.section{margin:28px 0}
 
-    /* ---------- NAV ---------- */
-    .nav{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter:saturate(140%) blur(10px);
-      background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.05));
-      border-bottom:1px solid var(--border);
-    }
-    .nav__inner{
-      max-width:var(--max); margin:auto;
-      display:flex; align-items:center; justify-content:space-between;
-      padding:14px 18px;
-    }
-    .brand{display:flex; gap:10px; align-items:center; font-weight:700; letter-spacing:.2px}
-    .brand__dot{
-      width:14px; height:14px; border-radius:4px;
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      box-shadow:0 6px 16px rgba(216,180,138,.5);
-    }
-    .menu{display:flex; gap:22px; align-items:center}
-    .menu a{
-      color:var(--muted); text-decoration:none; font-size:.95rem;
-      padding:6px 8px; border-radius:10px; transition:.2s ease color, .2s ease background;
-    }
-    .menu a:hover{color:var(--text); background:var(--glass)}
-    .contact{
-      border:1px solid var(--border); padding:8px 14px; border-radius:14px;
-    }
-    .hamburger{display:none; width:36px; height:36px; border:1px solid var(--border); border-radius:12px; background:transparent; color:var(--text)}
-    @media (max-width:860px){
-      .menu{display:none}
-      .hamburger{display:inline-grid; place-items:center}
-      .nav.open .menu{
-        display:flex; position:absolute; left:16px; right:16px; top:64px;
-        background:var(--bg-2); border:1px solid var(--border); border-radius:18px;
-        padding:16px; flex-wrap:wrap; gap:10px; box-shadow:var(--shadow);
-      }
-      .nav.open .menu a{flex:1 1 calc(50% - 10px); text-align:center}
-    }
+/* ============ NAV ============ */
+.nav{position:sticky; top:0; z-index:50; border-bottom:1px solid var(--border);
+  backdrop-filter:saturate(140%) blur(8px);
+  background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.02));
+}
+html[data-theme="light"] .nav{
+  background:linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,255,255,.35));
+}
+.nav__inner{display:flex; align-items:center; justify-content:space-between; padding:12px 18px}
+.brand{display:flex; gap:10px; align-items:center; font-weight:800; letter-spacing:.2px}
+.brand__dot{width:14px; height:14px; border-radius:4px;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2)); box-shadow:0 6px 16px rgba(216,180,138,.5)}
+.menu{display:flex; gap:22px; align-items:center}
+.menu a{color:var(--muted); text-decoration:none; padding:6px 8px; border-radius:10px}
+.menu a:hover{color:var(--text); background:rgba(255,255,255,.08)}
+.contact{border:1px solid var(--border); padding:8px 14px; border-radius:14px}
+.hamburger{display:none; width:38px; height:38px; border:1px solid var(--border); border-radius:12px; background:transparent; color:var(--text)}
+.theme{margin-left:8px; width:38px; height:38px; border:1px solid var(--border); border-radius:12px; background:transparent; color:var(--text); cursor:pointer}
+@media (max-width:880px){
+  .menu{display:none}
+  .hamburger{display:inline-grid; place-items:center}
+  .nav.open .menu{
+    display:flex; position:absolute; left:16px; right:16px; top:64px; flex-wrap:wrap;
+    gap:10px; padding:16px; border:1px solid var(--border); border-radius:16px; background:var(--bg-2); box-shadow:var(--shadow)
+  }
+  .nav.open .menu a{flex:1 1 calc(50% - 10px); text-align:center}
+}
 
-    /* ---------- HERO ---------- */
-    .hero{
-      max-width:var(--max); margin:40px auto 24px; padding:0 18px;
-      display:grid; grid-template-columns:1.05fr .95fr; gap:26px;
-      align-items:stretch;
-    }
-    @media (max-width:980px){ .hero{grid-template-columns:1fr} }
+/* ============ HERO ============ */
+.hero{display:grid; gap:26px; grid-template-columns:1.05fr .95fr; align-items:stretch}
+@media (max-width:980px){ .hero{grid-template-columns:1fr} }
+.headline{display:flex; flex-direction:column; justify-content:center; gap:20px; padding:20px 0 24px}
+.eyebrow{color:var(--muted); letter-spacing:.17em; text-transform:uppercase; font-size:.76rem}
+.title{font-family:"Playfair Display",serif; font-size:clamp(42px, 7vw, 84px); line-height:1.02}
+.subtitle{max-width:45ch}
+.cta{display:flex; gap:14px; align-items:center}
 
-    .headline{
-      display:flex; flex-direction:column; justify-content:center;
-      gap:22px; padding:20px 0 24px;
-    }
-    .eyebrow{color:var(--muted); letter-spacing:.17em; text-transform:uppercase; font-size:.76rem}
-    .title{
-      font-family:"Playfair Display", serif;
-      font-size:clamp(42px, 7vw, 84px);
-      line-height:1.02; letter-spacing:.5px;
-    }
-    .subtitle{color:#cfd5dc; max-width:38ch}
-    .cta{
-      display:flex; gap:14px; align-items:center; margin-top:4px;
-    }
-    .btn{
-      appearance:none; border:0; cursor:pointer;
-      padding:14px 20px; border-radius:16px; font-weight:600;
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      color:#151515; box-shadow:0 10px 30px rgba(216,180,138,.35);
-    }
-    .btn--ghost{
-      background:transparent; color:var(--text);
-      border:1px solid var(--border)
-    }
+.card{
+  position:relative; overflow:hidden; user-select:none;
+  background:linear-gradient(180deg, #212831, #171c23);
+  border:1px solid var(--border); border-radius:var(--radius-xl);
+  box-shadow:var(--shadow); padding:22px 22px 86px; transform-style:preserve-3d;
+}
+html[data-theme="light"] .card{background:linear-gradient(180deg,#ffffff,#f5f7fa)}
+.chipbar{display:flex; gap:8px}
+.chip{font-size:.78rem; color:#cfd5dc; background:rgba(255,255,255,.08); border:1px solid var(--border);
+  padding:6px 10px; border-radius:999px}
+html[data-theme="light"] .chip{color:#354150}
+.feat-h{font-weight:800; margin:14px 0 2px}
+.feat-p{color:#c7cfd7; font-size:.95rem}
 
-    /* Right Feature Card */
-    .feature-card{
-      position:relative;
-      background:linear-gradient(180deg, #212831, #171c23);
-      border:1px solid var(--border);
-      border-radius:var(--radius-xl);
-      padding:22px 22px 0;
-      box-shadow:var(--shadow);
-      overflow:hidden;
-      min-height:460px;
-    }
-    .chipbar{display:flex; gap:8px}
-    .chip{
-      font-size:.78rem; color:#cfd5dc; background:var(--glass);
-      border:1px solid var(--border); padding:6px 10px; border-radius:999px;
-    }
-    .feat-h{font-weight:700; margin:14px 0 2px}
-    .feat-p{color:#c7cfd7; font-size:.95rem}
+/* carousel */
+.carousel{position:absolute; left:22px; right:22px; bottom:18px; height:240px; border-radius:18px; border:1px solid var(--border); overflow:hidden; background:#0d1116}
+.track{display:flex; height:100%; transition:transform .45s ease}
+.slide{min-width:100%; position:relative}
+.slide img{width:100%; height:100%; object-fit:cover; display:block; filter:contrast(1.05)}
+.carousel .dots{position:absolute; left:0; right:0; bottom:10px; display:flex; gap:6px; justify-content:center}
+.dots button{width:8px; height:8px; border-radius:50%; border:none; background:rgba(255,255,255,.35); cursor:pointer}
+.dots button.active{background:linear-gradient(135deg,var(--accent),var(--accent-2))}
+.controls{position:absolute; inset:0; display:flex; align-items:center; justify-content:space-between; padding:0 6px}
+.controls button{width:34px; height:34px; border-radius:50%; border:1px solid var(--border); background:rgba(0,0,0,.25); color:#fff; cursor:pointer}
+html[data-theme="light"] .controls button{background:rgba(255,255,255,.65); color:#222}
 
-    /* Roomtour thumb */
-    .thumb{
-      position:absolute; right:18px; top:18px;
-      width:130px; aspect-ratio:4/3; border-radius:16px;
-      overflow:hidden; border:1px solid var(--border);
-      background:#0f1114;
-      display:grid; place-items:center;
-    }
-    .thumb button{
-      width:38px; height:38px; border-radius:50%;
-      border:none; cursor:pointer;
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      color:#111; font-weight:800;
-      box-shadow:0 10px 24px rgba(216,180,138,.35);
-    }
-    .thumb small{position:absolute; bottom:6px; left:10px; color:#111; background:#e8d7c1; padding:2px 8px; border-radius:999px; font-size:.72rem}
+/* info row */
+.info{display:grid; grid-template-columns:1fr 1fr; gap:22px}
+@media (max-width:880px){ .info{grid-template-columns:1fr} }
+.materials, .panel{
+  background:linear-gradient(180deg,#2a323d,#1b222b);
+  border:1px solid var(--border); border-radius:var(--radius-lg);
+  padding:20px;
+}
+html[data-theme="light"] .materials, html[data-theme="light"] .panel{background:#fff}
+.block{width:76px; height:76px; border-radius:16px;
+  background:radial-gradient(120% 100% at 0 0, #d9c1a0 0%, #9e7e57 60%, #6f5437 100%);
+  border:1px solid rgba(0,0,0,.25); box-shadow:inset 0 2px 0 rgba(255,255,255,.18), 0 8px 24px rgba(0,0,0,.35); margin-right:14px
+}
+.materials .row{display:flex; align-items:center}
+.panel{display:flex; align-items:center; justify-content:space-between; gap:16px}
+.avatars{display:flex}
+.avatars img{width:40px; height:40px; border-radius:50%; border:2px solid #111; margin-left:-8px}
+.stat{font-family:"Playfair Display",serif; font-size:40px}
 
-    /* House illustration (SVG) */
-    .house{
-      position:absolute; left:22px; right:22px; bottom:0; height:64%;
-      border-top-left-radius:20px; border-top-right-radius:20px;
-      overflow:hidden; display:block;
-    }
+/* contact */
+#contact{display:grid; grid-template-columns:1.2fr .8fr; gap:22px}
+@media (max-width:900px){ #contact{grid-template-columns:1fr} }
+.form{
+  background:var(--bg-2); border:1px solid var(--border); border-radius:var(--radius-lg); padding:22px; box-shadow:var(--shadow)
+}
+label{display:block; font-weight:600; margin:6px 0}
+input, textarea{
+  width:100%; border:1px solid var(--border); background:transparent; color:var(--text);
+  padding:12px 12px; border-radius:12px; outline:none;
+}
+textarea{min-height:120px; resize:vertical}
+aside.card.mini{min-height:auto; padding:18px 18px}
 
-    /* ---------- INFO STRIP ---------- */
-    .info{
-      max-width:var(--max); margin:6px auto 28px; padding:0 18px;
-      display:grid; grid-template-columns:1fr 1fr; gap:22px;
-    }
-    @media (max-width:860px){ .info{grid-template-columns:1fr} }
+/* footer */
+footer{border-top:1px solid var(--border); color:var(--muted); padding:22px 0; margin-top:36px}
+footer .row{display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap}
+footer a{color:var(--muted); text-decoration:none}
+footer a:hover{color:var(--text)}
 
-    .materials{
-      background:linear-gradient(180deg,#2a323d,#1b222b);
-      border:1px solid var(--border); border-radius:var(--radius-lg);
-      padding:20px; display:grid; grid-template-columns:auto 1fr; gap:16px; align-items:center;
-    }
-    .block{
-      width:76px; height:76px; border-radius:16px;
-      background:
-        radial-gradient(120% 100% at 0% 0%, #d9c1a0 0%, #9e7e57 60%, #6f5437 100%);
-      border:1px solid rgba(0,0,0,.25);
-      box-shadow:inset 0 2px 0 rgba(255,255,255,.18), 0 8px 24px rgba(0,0,0,.35);
-    }
-    .materials h4{margin:0 0 6px}
-    .materials p{margin:0; color:#cfd5dc}
+/* sticky cta + toast + top */
+.fab{
+  position:fixed; right:18px; bottom:22px; z-index:60;
+  display:flex; flex-direction:column; gap:10px;
+}
+.fab .round{width:54px; height:54px; border-radius:50%; border:1px solid var(--border); background:linear-gradient(135deg,var(--accent),var(--accent-2)); color:#111; display:grid; place-items:center; box-shadow:0 16px 34px rgba(216,180,138,.35); cursor:pointer}
+.fab .ghost{background:var(--bg-2); color:var(--text)}
+.toast{
+  position:fixed; left:50%; transform:translateX(-50%) translateY(20px); bottom:-80px; z-index:70;
+  background:var(--bg-2); color:var(--text); border:1px solid var(--border); padding:12px 16px; border-radius:14px; transition:bottom .35s ease;
+  box-shadow:var(--shadow)
+}
+.toast.show{bottom:86px}
 
-    .cta-panel{
-      background:linear-gradient(180deg,#232a33,#171d24);
-      border:1px solid var(--border); border-radius:var(--radius-lg);
-      padding:22px; display:flex; align-items:center; justify-content:space-between; gap:16px;
-    }
-    .avatars{display:flex}
-    .avatars img{
-      width:40px; height:40px; border-radius:50%; border:2px solid #111; margin-left:-8px
-    }
-    .stat{font-family:"Playfair Display",serif; font-size:40px}
-    .muted{color:var(--muted)}
-    .tiny{font-size:.88rem}
+/* back-to-top hidden state */
+#toTop{opacity:.0; pointer-events:none; transition:opacity .2s ease}
+#toTop.show{opacity:1; pointer-events:auto}
 
-    /* ---------- FOOTER ---------- */
-    footer{
-      max-width:var(--max); margin:28px auto 46px; padding:0 18px;
-      display:grid; grid-template-columns:1fr auto; gap:12px; align-items:center;
-      color:var(--muted);
-      border-top:1px solid var(--border);
-      padding-top:22px;
-    }
-    footer a{color:var(--muted); text-decoration:none}
-    footer a:hover{color:var(--text)}
-
-    /* Smooth embellishments */
-    .glow{
-      position:fixed; inset:auto auto 10% -10%;
-      width:520px; height:520px; border-radius:50%;
-      background:radial-gradient(closest-side, rgba(216,180,138,.22), transparent 70%);
-      filter:blur(20px); pointer-events:none; opacity:.55;
-    }
-  </style>
+/* reveal on scroll */
+.reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease}
+.reveal.show{opacity:1; transform:none}
+</style>
 </head>
 <body>
-    <div class="glow" aria-hidden="true"></div>
 
-  <!-- NAV -->
-  <nav class="nav" id="nav">
-    <div class="nav__inner">
-      <div class="brand">
-        <span class="brand__dot" aria-hidden="true"></span>
-        RANTY
-      </div>
-
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav__inner container">
+    <div class="brand">
+      <span class="brand__dot" aria-hidden="true"></span> RANTY
+    </div>
+    <div style="display:flex; align-items:center; gap:8px">
+      <button class="theme" id="themeBtn" title="Toggle theme">☼</button>
       <button class="hamburger" id="hamburger" aria-label="Open menu">☰</button>
-
-      <div class="menu" id="menu">
-        <a href="#services">Services</a>
-        <a href="#homes">Homes</a>
-        <a href="#about">About us</a>
-        <a href="#cases">Cases</a>
-        <a class="contact" href="#contact">Contact us</a>
-      </div>
     </div>
-  </nav>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="headline">
-      <div class="eyebrow">We craft custom homes ®</div>
-      <h1 class="title">THE<br/>PERFECT<br/>HOME</h1>
-      <p class="subtitle">
-        Unique design & ergonomics — from blueprints to renders. We combine nature and comfort for modern living.
-      </p>
-      <div class="cta">
-        <a class="btn" href="#contact">Start</a>
-        <a class="btn btn--ghost" href="#learn">Learn more</a>
-      </div>
+    <div class="menu" id="menu">
+      <a href="#services">Services</a>
+      <a href="#homes">Homes</a>
+      <a href="#about">About us</a>
+      <a href="#cases">Cases</a>
+      <a class="contact" href="#contact">Contact us</a>
     </div>
+  </div>
+</nav>
 
-    <aside class="feature-card" aria-label="Feature: Unique design & ergonomics">
-      <div class="chipbar">
-        <span class="chip">Interior</span>
-        <span class="chip">Design</span>
-        <span class="chip">3D</span>
+<!-- HERO -->
+<header class="section container hero">
+  <div class="headline reveal">
+    <div class="eyebrow">We craft custom homes ®</div>
+    <h1 class="title">THE<br/>PERFECT<br/>HOME</h1>
+    <p class="subtitle muted">Unique design & ergonomics — from blueprints to renders. We combine nature and comfort for modern living.</p>
+    <div class="cta">
+      <a class="btn" id="startCta" href="#contact">Start</a>
+      <a class="btn btn--ghost" href="#learn">Learn more</a>
+    </div>
+  </div>
+
+  <aside class="card reveal" id="parallaxCard" aria-label="Feature: Unique design & ergonomics">
+    <div class="chipbar">
+      <span class="chip">Interior</span>
+      <span class="chip">Design</span>
+      <span class="chip">3D</span>
+    </div>
+    <h3 class="feat-h">Unique design & ergonomics</h3>
+    <p class="feat-p">From blueprints to photorealistic renders.</p>
+
+    <!-- Carousel -->
+    <div class="carousel" id="carousel" aria-label="Room tour carousel">
+      <div class="track">
+        <div class="slide"><img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?auto=format&fit=crop&w=1400&q=60" alt="Living room"></div>
+        <div class="slide"><img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1400&q=60" alt="Kitchen"></div>
+        <div class="slide"><img src="https://images.unsplash.com/photo-1502005229762-cf1b2da7c52f?auto=format&fit=crop&w=1400&q=60" alt="Bedroom"></div>
       </div>
-      <h3 class="feat-h">Unique design & ergonomics</h3>
-      <p class="feat-p">From blueprints to photorealistic renders.</p>
-
-      <div class="thumb">
-        <!-- Replace the image below if you want a real frame; keeping it abstract -->
-        <button aria-label="Play room tour">▶</button>
-        <small>ROOMTOUR</small>
+      <div class="controls">
+        <button aria-label="Prev" data-dir="-1">‹</button>
+        <button aria-label="Next" data-dir="1">›</button>
       </div>
+      <div class="dots" aria-hidden="true"></div>
+    </div>
+  </aside>
+</header>
 
-      <!-- Minimal, stylized house illustration -->
-      <svg class="house" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMax slice" role="img" aria-label="Modern house illustration">
-        <defs>
-          <linearGradient id="roof" x1="0" x2="1" y1="0" y2="1">
-            <stop offset="0" stop-color="#0e1217"/>
-            <stop offset="1" stop-color="#29303a"/>
-          </linearGradient>
-          <linearGradient id="wood" x1="0" x2="1">
-            <stop offset="0" stop-color="#f0d2b1"/>
-            <stop offset="1" stop-color="#c79f72"/>
-          </linearGradient>
-          <linearGradient id="concrete" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0" stop-color="#e7edf4"/>
-            <stop offset="1" stop-color="#c9d2dc"/>
-          </linearGradient>
-        </defs>
-        <!-- ground -->
-        <rect x="-10" y="500" width="1220" height="160" fill="#0f1216"/>
-        <!-- body -->
-        <rect x="120" y="360" width="880" height="140" rx="10" fill="url(#concrete)"/>
-        <!-- cantilever level -->
-        <rect x="360" y="260" width="520" height="140" rx="26" fill="url(#wood)"/>
-        <!-- windows -->
-        <rect x="410" y="300" width="120" height="54" rx="8" fill="#0f141a"/>
-        <rect x="570" y="300" width="110" height="54" rx="8" fill="#0f141a"/>
-        <rect x="730" y="300" width="120" height="54" rx="8" fill="#0f141a"/>
-        <!-- roof curve -->
-        <path d="M340,260 q160,-120 520,0 v20 q-260,-110 -520,0z" fill="url(#roof)"/>
-        <!-- lights -->
-        <circle cx="420" cy="330" r="6" fill="#ffd7a0"/>
-        <circle cx="695" cy="330" r="6" fill="#ffd7a0"/>
-        <circle cx="820" cy="330" r="6" fill="#ffd7a0"/>
-        <!-- base lights -->
-        <rect x="160" y="420" width="80" height="26" rx="6" fill="#0f141a"/>
-        <rect x="260" y="420" width="80" height="26" rx="6" fill="#0f141a"/>
-        <rect x="870" y="420" width="80" height="26" rx="6" fill="#0f141a"/>
-      </svg>
-    </aside>
-  </section>
-
-  <!-- INFO STRIP -->
-  <section class="info" id="learn">
-    <article class="materials">
+<!-- INFO STRIP -->
+<section class="section container info" id="learn">
+  <article class="materials reveal">
+    <div class="row">
       <div class="block" aria-hidden="true"></div>
       <div>
-        <h4>We use best materials!</h4>
-        <p class="tiny">Working with verified suppliers. Premium timber, reinforced concrete, and low-VOC finishes.</p>
+        <h3>We use best materials!</h3>
+        <p class="muted">Working with verified suppliers. Premium timber, reinforced concrete, and low-VOC finishes.</p>
       </div>
-    </article>
+    </div>
+  </article>
 
-    <article class="cta-panel">
-      <div style="display:flex; gap:16px; align-items:center">
-        <div class="avatars" aria-hidden="true">
-          <img alt="" src="https://i.pravatar.cc/80?img=15">
-          <img alt="" src="https://i.pravatar.cc/80?img=5">
-        </div>
-        <div>
-          <div class="stat">12m+</div>
-          <div class="muted tiny">Customers</div>
-        </div>
+  <article class="panel reveal">
+    <div style="display:flex; gap:16px; align-items:center">
+      <div class="avatars" aria-hidden="true">
+        <img alt="" src="https://i.pravatar.cc/80?img=15">
+        <img alt="" src="https://i.pravatar.cc/80?img=5">
       </div>
-      <a class="btn btn--ghost" href="#about">Learn more</a>
-    </article>
-  </section>
+      <div>
+        <div class="stat"><span id="counter">0</span>m+</div>
+        <div class="muted">Customers</div>
+      </div>
+    </div>
+    <a class="btn btn--ghost" href="#about">Learn more</a>
+  </article>
+</section>
 
-  <!-- FOOTER -->
-  <footer>
+<!-- SERVICES (dummy anchors to demo smooth scroll) -->
+<section class="section container reveal" id="services">
+  <h2 style="font-family:'Playfair Display',serif; margin:0 0 8px">Services</h2>
+  <p class="muted">Architecture • Interior • Landscape • 3D Visualization • Renovation</p>
+</section>
+<section class="section container reveal" id="homes">
+  <h2 style="font-family:'Playfair Display',serif; margin:0 0 8px">Homes</h2>
+  <p class="muted">Browse concept designs and real builds suited for diverse climates.</p>
+</section>
+<section class="section container reveal" id="about">
+  <h2 style="font-family:'Playfair Display',serif; margin:0 0 8px">About us</h2>
+  <p class="muted">We are a multidisciplinary studio blending ergonomics with sustainable materials to craft timeless spaces.</p>
+</section>
+<section class="section container reveal" id="cases">
+  <h2 style="font-family:'Playfair Display',serif; margin:0 0 8px">Cases</h2>
+  <p class="muted">A curated selection of client projects with before/after visuals.</p>
+</section>
+
+<!-- CONTACT -->
+<section class="section container" id="contact">
+  <form class="form reveal" id="contactForm" novalidate>
+    <h2 style="font-family:'Playfair Display',serif; margin:0 0 8px">Tell us about your dream home</h2>
+    <p class="muted" style="margin-top:0">We’ll get back within 24h.</p>
+    <label for="name">Name</label>
+    <input id="name" name="name" required placeholder="Jane Doe" />
+    <label for="email">Email</label>
+    <input id="email" name="email" type="email" required placeholder="jane@example.com" />
+    <label for="msg">Project details</label>
+    <textarea id="msg" name="msg" required placeholder="Site location, style, budget…"></textarea>
+    <div style="display:flex; gap:12px; align-items:center; margin-top:12px">
+      <button class="btn" type="submit">Send inquiry</button>
+      <span class="muted" id="formStatus"></span>
+    </div>
+  </form>
+
+  <aside class="card mini reveal">
+    <h3 class="feat-h" style="margin-top:0">Roomtour video</h3>
+    <p class="feat-p">Take a quick walkthrough of our latest build.</p>
+    <button class="btn btn--ghost" id="openVideo">Play video</button>
+  </aside>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container row">
     <div>© <span id="yr"></span> RANTY Homes. All rights reserved.</div>
     <div style="display:flex; gap:16px">
-      <a href="#privacy">Privacy</a>
-      <a href="#terms">Terms</a>
-      <a href="#contact" class="contact">Contact</a>
+      <a href="#">Privacy</a><a href="#">Terms</a><a href="#contact" class="contact">Contact</a>
     </div>
-  </footer>
+  </div>
+</footer>
 
-  <script>
-    // Year
-    document.getElementById('yr').textContent = new Date().getFullYear();
+<!-- STICKY CTA + TOAST + TOP -->
+<div class="fab">
+  <button class="round" id="quickStart" title="Start project">▶</button>
+  <button class="round ghost" id="toTop" title="Back to top">↑</button>
+</div>
+<div class="toast" id="toast">Thanks! We’ll contact you shortly.</div>
 
-    // Mobile menu toggle
-    const nav = document.getElementById('nav');
-    const hamburger = document.getElementById('hamburger');
-    hamburger.addEventListener('click', () => nav.classList.toggle('open'));
+<!-- Simple Modal -->
+<dialog id="videoModal" style="padding:0; border:none; border-radius:16px; max-width:min(900px, 92vw);">
+  <div style="background:var(--bg-2); color:var(--text); border:1px solid var(--border); border-radius:16px; overflow:hidden">
+    <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 14px; border-bottom:1px solid var(--border)">
+      <strong>Roomtour</strong>
+      <form method="dialog"><button class="btn btn--ghost" style="padding:8px 12px">Close</button></form>
+    </div>
+    <!-- Replace the src with your own video link if desired -->
+    <div style="aspect-ratio:16/9; background:#000">
+      <iframe width="100%" height="100%" src="https://www.youtube.com/embed/Z1JZ9O15280?rel=0"
+        title="YouTube video" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+  </div>
+</dialog>
 
-    // Smooth-scroll for internal links
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', e=>{
-        const id = a.getAttribute('href').slice(1);
-        const el = document.getElementById(id);
-        if(el){
-          e.preventDefault();
-          nav.classList.remove('open');
-          window.scrollTo({top: el.getBoundingClientRect().top + window.scrollY - 70, behavior:'smooth'});
-        }
-      });
+<script>
+/* ===== util ===== */
+const $ = (q,doc=document)=>doc.querySelector(q);
+const $$ = (q,doc=document)=>Array.from(doc.querySelectorAll(q));
+
+/* ===== year ===== */
+$('#yr').textContent = new Date().getFullYear();
+
+/* ===== theme toggle (persist) ===== */
+const themeBtn = $('#themeBtn');
+const saved = localStorage.getItem('theme');
+if(saved) document.documentElement.setAttribute('data-theme', saved);
+themeBtn.addEventListener('click', ()=>{
+  const cur = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light':'dark';
+  document.documentElement.setAttribute('data-theme', cur);
+  localStorage.setItem('theme', cur);
+  themeBtn.textContent = cur === 'dark' ? '☼' : '☾';
+});
+themeBtn.textContent = document.documentElement.getAttribute('data-theme') === 'dark' ? '☼' : '☾';
+
+/* ===== mobile menu ===== */
+const nav = $('#nav'), hamburger = $('#hamburger'), menu = $('#menu');
+hamburger.addEventListener('click', ()=> nav.classList.toggle('open'));
+$$('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click', e=>{
+    const id = a.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if(el){
+      e.preventDefault(); nav.classList.remove('open');
+      window.scrollTo({top: el.getBoundingClientRect().top + window.scrollY - 70, behavior:'smooth'});
+    }
+  });
+});
+
+/* ===== parallax tilt on hero card ===== */
+const tilt = $('#parallaxCard');
+tilt.addEventListener('mousemove', e=>{
+  const r = tilt.getBoundingClientRect();
+  const x = (e.clientX - r.left) / r.width - .5;
+  const y = (e.clientY - r.top) / r.height - .5;
+  tilt.style.transform = `perspective(900px) rotateY(${x*6}deg) rotateX(${ -y*6 }deg)`;
+});
+tilt.addEventListener('mouseleave', ()=> tilt.style.transform = 'none');
+
+/* ===== scroll reveal ===== */
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(en=>{
+    if(en.isIntersecting){ en.target.classList.add('show'); io.unobserve(en.target); }
+  });
+},{threshold:.14});
+$$('.reveal').forEach(el=> io.observe(el));
+
+/* ===== counter animation ===== */
+function countUp(el, target=12, dur=1300){
+  const start = performance.now();
+  function tick(t){
+    const p = Math.min((t - start)/dur, 1);
+    el.textContent = (target*p).toFixed(1).replace(/\.0$/,'');
+    if(p<1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+io.observe($('#counter').closest('.panel'));
+$('#counter').closest('.panel').addEventListener('transitionend', e=>{
+  if(e.propertyName==='transform' && e.target.classList.contains('show')) countUp($('#counter'), 12);
+});
+
+/* ===== carousel ===== */
+(function(){
+  const root = $('#carousel');
+  const track = $('.track', root);
+  const slides = $$('.slide', root);
+  const dots = $('.dots', root);
+  let i=0, dragging=false, startX=0, delta=0, timer;
+
+  function go(n){
+    i = (n + slides.length) % slides.length;
+    track.style.transform = `translateX(${-i*100}%)`;
+    updateDots();
+    resetAuto();
+  }
+  function updateDots(){
+    dots.innerHTML = '';
+    slides.forEach((_,k)=>{
+      const b = document.createElement('button');
+      if(k===i) b.classList.add('active');
+      b.addEventListener('click', ()=>go(k));
+      dots.appendChild(b);
     });
-  </script>
+  }
+  function auto(){ timer = setInterval(()=>go(i+1), 4000); }
+  function resetAuto(){ clearInterval(timer); auto(); }
+
+  // drag/swipe
+  track.addEventListener('pointerdown', e=>{ dragging=true; startX=e.clientX; track.setPointerCapture(e.pointerId); clearInterval(timer); });
+  track.addEventListener('pointermove', e=>{
+    if(!dragging) return;
+    delta = e.clientX - startX;
+    track.style.transition='none';
+    track.style.transform = `translateX(${(-i*100) + (delta/track.clientWidth*100)}%)`;
+  });
+  track.addEventListener('pointerup', e=>{
+    if(!dragging) return; dragging=false; track.releasePointerCapture(e.pointerId); track.style.transition='';
+    if(Math.abs(delta) > track.clientWidth*0.15) go(i + (delta<0?1:-1)); else go(i);
+    delta=0;
+  });
+
+  // arrows
+  $$('.controls button', root).forEach(btn=>{
+    btn.addEventListener('click', ()=> go(i + (btn.dataset.dir==='1'?1:-1)));
+  });
+
+  updateDots(); auto();
+})();
+
+/* ===== sticky CTA + toast + toTop ===== */
+const toast = $('#toast'), quick = $('#quickStart'), startCta = $('#startCta'), toTop = $('#toTop');
+function showToast(msg){
+  toast.textContent = msg; toast.classList.add('show');
+  setTimeout(()=> toast.classList.remove('show'), 2200);
+}
+quick.addEventListener('click', (e)=>{ e.preventDefault(); showToast('Starting your project…'); document.getElementById('contact').scrollIntoView({behavior:'smooth'}); });
+startCta.addEventListener('click', ()=> showToast('Great! Tell us a few details.'));
+
+window.addEventListener('scroll', ()=>{
+  if(window.scrollY > 400) toTop.classList.add('show'); else toTop.classList.remove('show');
+});
+toTop.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+
+/* ===== contact form (client-side only) ===== */
+const form = $('#contactForm'), status = $('#formStatus');
+form.addEventListener('submit', (e)=>{
+  e.preventDefault();
+  if(!form.checkValidity()){
+    status.textContent = 'Please fill all fields correctly.'; status.style.color = '#e16';
+    form.reportValidity(); return;
+  }
+  // simulate success
+  status.style.color = 'inherit';
+  status.textContent = 'Sending…';
+  setTimeout(()=>{
+    status.textContent = 'Sent! We’ll reach out soon.';
+    form.reset();
+    showToast('Inquiry sent ✅');
+  }, 800);
+});
+
+/* ===== modal video ===== */
+const dialog = $('#videoModal');
+$('#openVideo').addEventListener('click', ()=> dialog.showModal());
+dialog.addEventListener('close', ()=>{
+  // stop video (reset src)
+  const ifr = $('iframe', dialog);
+  ifr.src = ifr.src;
+});
+</script>
 </body>
 </html>
