@@ -205,6 +205,153 @@
   </style>
 </head>
 <body>
-    
+    <div class="glow" aria-hidden="true"></div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <div class="brand">
+        <span class="brand__dot" aria-hidden="true"></span>
+        RANTY
+      </div>
+
+      <button class="hamburger" id="hamburger" aria-label="Open menu">☰</button>
+
+      <div class="menu" id="menu">
+        <a href="#services">Services</a>
+        <a href="#homes">Homes</a>
+        <a href="#about">About us</a>
+        <a href="#cases">Cases</a>
+        <a class="contact" href="#contact">Contact us</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="headline">
+      <div class="eyebrow">We craft custom homes ®</div>
+      <h1 class="title">THE<br/>PERFECT<br/>HOME</h1>
+      <p class="subtitle">
+        Unique design & ergonomics — from blueprints to renders. We combine nature and comfort for modern living.
+      </p>
+      <div class="cta">
+        <a class="btn" href="#contact">Start</a>
+        <a class="btn btn--ghost" href="#learn">Learn more</a>
+      </div>
+    </div>
+
+    <aside class="feature-card" aria-label="Feature: Unique design & ergonomics">
+      <div class="chipbar">
+        <span class="chip">Interior</span>
+        <span class="chip">Design</span>
+        <span class="chip">3D</span>
+      </div>
+      <h3 class="feat-h">Unique design & ergonomics</h3>
+      <p class="feat-p">From blueprints to photorealistic renders.</p>
+
+      <div class="thumb">
+        <!-- Replace the image below if you want a real frame; keeping it abstract -->
+        <button aria-label="Play room tour">▶</button>
+        <small>ROOMTOUR</small>
+      </div>
+
+      <!-- Minimal, stylized house illustration -->
+      <svg class="house" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMax slice" role="img" aria-label="Modern house illustration">
+        <defs>
+          <linearGradient id="roof" x1="0" x2="1" y1="0" y2="1">
+            <stop offset="0" stop-color="#0e1217"/>
+            <stop offset="1" stop-color="#29303a"/>
+          </linearGradient>
+          <linearGradient id="wood" x1="0" x2="1">
+            <stop offset="0" stop-color="#f0d2b1"/>
+            <stop offset="1" stop-color="#c79f72"/>
+          </linearGradient>
+          <linearGradient id="concrete" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0" stop-color="#e7edf4"/>
+            <stop offset="1" stop-color="#c9d2dc"/>
+          </linearGradient>
+        </defs>
+        <!-- ground -->
+        <rect x="-10" y="500" width="1220" height="160" fill="#0f1216"/>
+        <!-- body -->
+        <rect x="120" y="360" width="880" height="140" rx="10" fill="url(#concrete)"/>
+        <!-- cantilever level -->
+        <rect x="360" y="260" width="520" height="140" rx="26" fill="url(#wood)"/>
+        <!-- windows -->
+        <rect x="410" y="300" width="120" height="54" rx="8" fill="#0f141a"/>
+        <rect x="570" y="300" width="110" height="54" rx="8" fill="#0f141a"/>
+        <rect x="730" y="300" width="120" height="54" rx="8" fill="#0f141a"/>
+        <!-- roof curve -->
+        <path d="M340,260 q160,-120 520,0 v20 q-260,-110 -520,0z" fill="url(#roof)"/>
+        <!-- lights -->
+        <circle cx="420" cy="330" r="6" fill="#ffd7a0"/>
+        <circle cx="695" cy="330" r="6" fill="#ffd7a0"/>
+        <circle cx="820" cy="330" r="6" fill="#ffd7a0"/>
+        <!-- base lights -->
+        <rect x="160" y="420" width="80" height="26" rx="6" fill="#0f141a"/>
+        <rect x="260" y="420" width="80" height="26" rx="6" fill="#0f141a"/>
+        <rect x="870" y="420" width="80" height="26" rx="6" fill="#0f141a"/>
+      </svg>
+    </aside>
+  </section>
+
+  <!-- INFO STRIP -->
+  <section class="info" id="learn">
+    <article class="materials">
+      <div class="block" aria-hidden="true"></div>
+      <div>
+        <h4>We use best materials!</h4>
+        <p class="tiny">Working with verified suppliers. Premium timber, reinforced concrete, and low-VOC finishes.</p>
+      </div>
+    </article>
+
+    <article class="cta-panel">
+      <div style="display:flex; gap:16px; align-items:center">
+        <div class="avatars" aria-hidden="true">
+          <img alt="" src="https://i.pravatar.cc/80?img=15">
+          <img alt="" src="https://i.pravatar.cc/80?img=5">
+        </div>
+        <div>
+          <div class="stat">12m+</div>
+          <div class="muted tiny">Customers</div>
+        </div>
+      </div>
+      <a class="btn btn--ghost" href="#about">Learn more</a>
+    </article>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>© <span id="yr"></span> RANTY Homes. All rights reserved.</div>
+    <div style="display:flex; gap:16px">
+      <a href="#privacy">Privacy</a>
+      <a href="#terms">Terms</a>
+      <a href="#contact" class="contact">Contact</a>
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('yr').textContent = new Date().getFullYear();
+
+    // Mobile menu toggle
+    const nav = document.getElementById('nav');
+    const hamburger = document.getElementById('hamburger');
+    hamburger.addEventListener('click', () => nav.classList.toggle('open'));
+
+    // Smooth-scroll for internal links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id = a.getAttribute('href').slice(1);
+        const el = document.getElementById(id);
+        if(el){
+          e.preventDefault();
+          nav.classList.remove('open');
+          window.scrollTo({top: el.getBoundingClientRect().top + window.scrollY - 70, behavior:'smooth'});
+        }
+      });
+    });
+  </script>
 </body>
 </html>
