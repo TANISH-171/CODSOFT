@@ -4,6 +4,205 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Landing page</title>
+     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+     <style>
+    :root{
+      --bg:#0f1216;
+      --bg-2:#151a20;
+      --card:#1b222b;
+      --muted:#9aa5b1;
+      --text:#f3f5f7;
+      --accent:#d8b48a; /* sand / taupe */
+      --accent-2:#c8a278;
+      --glass:rgba(255,255,255,.08);
+      --border:rgba(255,255,255,.08);
+      --shadow:0 20px 60px rgba(0,0,0,.45);
+      --radius:22px;
+      --radius-lg:28px;
+      --radius-xl:36px;
+      --max:1200px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0}
+    body{
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif;
+      color:var(--text);
+      background: radial-gradient(1200px 500px at 70% 0%, #202730 0%, #13181e 55%, var(--bg) 100%) fixed;
+      background-color:var(--bg);
+      line-height:1.55;
+    }
+
+    /* ---------- NAV ---------- */
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter:saturate(140%) blur(10px);
+      background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.05));
+      border-bottom:1px solid var(--border);
+    }
+    .nav__inner{
+      max-width:var(--max); margin:auto;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:14px 18px;
+    }
+    .brand{display:flex; gap:10px; align-items:center; font-weight:700; letter-spacing:.2px}
+    .brand__dot{
+      width:14px; height:14px; border-radius:4px;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      box-shadow:0 6px 16px rgba(216,180,138,.5);
+    }
+    .menu{display:flex; gap:22px; align-items:center}
+    .menu a{
+      color:var(--muted); text-decoration:none; font-size:.95rem;
+      padding:6px 8px; border-radius:10px; transition:.2s ease color, .2s ease background;
+    }
+    .menu a:hover{color:var(--text); background:var(--glass)}
+    .contact{
+      border:1px solid var(--border); padding:8px 14px; border-radius:14px;
+    }
+    .hamburger{display:none; width:36px; height:36px; border:1px solid var(--border); border-radius:12px; background:transparent; color:var(--text)}
+    @media (max-width:860px){
+      .menu{display:none}
+      .hamburger{display:inline-grid; place-items:center}
+      .nav.open .menu{
+        display:flex; position:absolute; left:16px; right:16px; top:64px;
+        background:var(--bg-2); border:1px solid var(--border); border-radius:18px;
+        padding:16px; flex-wrap:wrap; gap:10px; box-shadow:var(--shadow);
+      }
+      .nav.open .menu a{flex:1 1 calc(50% - 10px); text-align:center}
+    }
+
+    /* ---------- HERO ---------- */
+    .hero{
+      max-width:var(--max); margin:40px auto 24px; padding:0 18px;
+      display:grid; grid-template-columns:1.05fr .95fr; gap:26px;
+      align-items:stretch;
+    }
+    @media (max-width:980px){ .hero{grid-template-columns:1fr} }
+
+    .headline{
+      display:flex; flex-direction:column; justify-content:center;
+      gap:22px; padding:20px 0 24px;
+    }
+    .eyebrow{color:var(--muted); letter-spacing:.17em; text-transform:uppercase; font-size:.76rem}
+    .title{
+      font-family:"Playfair Display", serif;
+      font-size:clamp(42px, 7vw, 84px);
+      line-height:1.02; letter-spacing:.5px;
+    }
+    .subtitle{color:#cfd5dc; max-width:38ch}
+    .cta{
+      display:flex; gap:14px; align-items:center; margin-top:4px;
+    }
+    .btn{
+      appearance:none; border:0; cursor:pointer;
+      padding:14px 20px; border-radius:16px; font-weight:600;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      color:#151515; box-shadow:0 10px 30px rgba(216,180,138,.35);
+    }
+    .btn--ghost{
+      background:transparent; color:var(--text);
+      border:1px solid var(--border)
+    }
+
+    /* Right Feature Card */
+    .feature-card{
+      position:relative;
+      background:linear-gradient(180deg, #212831, #171c23);
+      border:1px solid var(--border);
+      border-radius:var(--radius-xl);
+      padding:22px 22px 0;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+      min-height:460px;
+    }
+    .chipbar{display:flex; gap:8px}
+    .chip{
+      font-size:.78rem; color:#cfd5dc; background:var(--glass);
+      border:1px solid var(--border); padding:6px 10px; border-radius:999px;
+    }
+    .feat-h{font-weight:700; margin:14px 0 2px}
+    .feat-p{color:#c7cfd7; font-size:.95rem}
+
+    /* Roomtour thumb */
+    .thumb{
+      position:absolute; right:18px; top:18px;
+      width:130px; aspect-ratio:4/3; border-radius:16px;
+      overflow:hidden; border:1px solid var(--border);
+      background:#0f1114;
+      display:grid; place-items:center;
+    }
+    .thumb button{
+      width:38px; height:38px; border-radius:50%;
+      border:none; cursor:pointer;
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      color:#111; font-weight:800;
+      box-shadow:0 10px 24px rgba(216,180,138,.35);
+    }
+    .thumb small{position:absolute; bottom:6px; left:10px; color:#111; background:#e8d7c1; padding:2px 8px; border-radius:999px; font-size:.72rem}
+
+    /* House illustration (SVG) */
+    .house{
+      position:absolute; left:22px; right:22px; bottom:0; height:64%;
+      border-top-left-radius:20px; border-top-right-radius:20px;
+      overflow:hidden; display:block;
+    }
+
+    /* ---------- INFO STRIP ---------- */
+    .info{
+      max-width:var(--max); margin:6px auto 28px; padding:0 18px;
+      display:grid; grid-template-columns:1fr 1fr; gap:22px;
+    }
+    @media (max-width:860px){ .info{grid-template-columns:1fr} }
+
+    .materials{
+      background:linear-gradient(180deg,#2a323d,#1b222b);
+      border:1px solid var(--border); border-radius:var(--radius-lg);
+      padding:20px; display:grid; grid-template-columns:auto 1fr; gap:16px; align-items:center;
+    }
+    .block{
+      width:76px; height:76px; border-radius:16px;
+      background:
+        radial-gradient(120% 100% at 0% 0%, #d9c1a0 0%, #9e7e57 60%, #6f5437 100%);
+      border:1px solid rgba(0,0,0,.25);
+      box-shadow:inset 0 2px 0 rgba(255,255,255,.18), 0 8px 24px rgba(0,0,0,.35);
+    }
+    .materials h4{margin:0 0 6px}
+    .materials p{margin:0; color:#cfd5dc}
+
+    .cta-panel{
+      background:linear-gradient(180deg,#232a33,#171d24);
+      border:1px solid var(--border); border-radius:var(--radius-lg);
+      padding:22px; display:flex; align-items:center; justify-content:space-between; gap:16px;
+    }
+    .avatars{display:flex}
+    .avatars img{
+      width:40px; height:40px; border-radius:50%; border:2px solid #111; margin-left:-8px
+    }
+    .stat{font-family:"Playfair Display",serif; font-size:40px}
+    .muted{color:var(--muted)}
+    .tiny{font-size:.88rem}
+
+    /* ---------- FOOTER ---------- */
+    footer{
+      max-width:var(--max); margin:28px auto 46px; padding:0 18px;
+      display:grid; grid-template-columns:1fr auto; gap:12px; align-items:center;
+      color:var(--muted);
+      border-top:1px solid var(--border);
+      padding-top:22px;
+    }
+    footer a{color:var(--muted); text-decoration:none}
+    footer a:hover{color:var(--text)}
+
+    /* Smooth embellishments */
+    .glow{
+      position:fixed; inset:auto auto 10% -10%;
+      width:520px; height:520px; border-radius:50%;
+      background:radial-gradient(closest-side, rgba(216,180,138,.22), transparent 70%);
+      filter:blur(20px); pointer-events:none; opacity:.55;
+    }
+  </style>
 </head>
 <body>
     
